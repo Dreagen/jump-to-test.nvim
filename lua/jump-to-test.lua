@@ -35,12 +35,10 @@ end
 
 function M.toggle()
 	if in_test_file() then
-		print("In test file, jumping to source")
 		M.jump_to_source()
 		return
 	end
 
-	print("In source file, jumping to test")
 	M.jump_to_test()
 end
 

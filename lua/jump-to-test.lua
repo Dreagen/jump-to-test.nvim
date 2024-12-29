@@ -24,6 +24,26 @@ local function scan_dir(dir, search)
 	end
 end
 
+local function in_test_file()
+	local filepath = vim.api.nvim_buf_get_name(0)
+	local file_ext = vim.fn.fnamemodify(filepath, ":e")
+
+	local ending = "Tests." .. file_ext
+
+	return filepath:sub(-#ending) == ending
+end
+
+function M.toggle()
+	if in_test_file() then
+		print("In test file, jumping to source")
+		M.jump_to_source()
+		return
+	end
+
+	print("In source file, jumping to test")
+	M.jump_to_test()
+end
+
 function M.jump_to_test()
 	local root_dir = vim.fn.getcwd()
 

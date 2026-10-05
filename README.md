@@ -1,8 +1,9 @@
 # Description
-This plugin allows you to jump to a test file and back to the source file.
-It currently works by looking for a file of the same name ending in `Tests` with the same file extension, I may choose to make this configurable at a later date but for now this works for my needs
+This plugin allows you to jump to matching test files and back to their source files.
 
-for example if you were in `MyService.cs` it would look for any file under the root directory of the current nvim instance called `MyServiceTests.cs`, it will also jump back from a test file by looking for a file with the same name without the Tests
+From `MyService.cs`, it searches under Neovim's current working directory for files with the same extension whose name contains `MyService` and `test` (case-insensitive). This supports names such as `MyServiceTests.cs`, `MyService.Test.cs`, and `MyServiceTests.Unit.cs`. If there is one match it opens it directly; if there are multiple matches, it shows a picker.
+
+When toggling from a filename containing `test`, the plugin removes `test` from the name and searches for same-extension, non-test files containing the remaining name. It uses the same direct-open or picker behavior for source matches.
 
 # Configuration
 
